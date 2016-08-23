@@ -1,0 +1,102 @@
+
+	
+
+    
+
+
+	
+	<div  >
+	<button style="float: right;" *ngIf="!isEditing && !isSearching && !isAdding" (click)="enableAdding()"> Add</button>
+<div>
+     <p> <input  *ngIf="!isAdding && !isEditing" colspan="4" style="width:250px; border: 1px solid blue; background-color: rgba(252, 243, 207, 0.2); box-shadow: 10px 10px 5px grey; "  class="form-control" type="text" name="name" [(ngModel)]="name" placeholder="Name" required    > </p>
+
+  <p> <button *ngIf="!isAdding" (click)="enableSearching(name)"> Find</button></p>
+    <table border=1 frame=void rules=rows class="table">
+			<thead *ngIf="!isEditing && !isAdding">
+				
+				<tr>
+					<th style="background-color: rgba(255, 0, 0, 0.2); ">BookName</th>
+					<th  style="background-color: rgba(255, 0, 0, 0.3);">Author</th>
+					<th  style="background-color: rgba(255, 0, 0, 0.4); ">Pages</th>
+					<th  style="background-color: rgba(255, 0, 0, 0.5); text-shadow: 2px 2px grey;">Actions</th>
+				</tr>
+			</thead>
+			<tbody *ngIf="books.length === 0">
+				<tr><td colspan="4">There are no books</td></tr>	
+			</tbody>
+
+			 <tbody *ngIf="!isEditing && !isSearching  && !isAdding "> 
+				<tr *ngFor="let book of books">
+					<td  style="background-color: hsla(120, 100%, 50%, 0.3);">{{book.bname}}</td>
+					<td style="background-color: hsla(120, 100%, 50%, 0.3);">{{book.author}}</td>
+					<td style="background-color: hsla(120, 100%, 50%, 0.3);">{{book.pages}}</td>
+					<td style="background-color: hsla(120, 100%, 50%, 0.3);">
+						<button  (click)="enableEditing(book)"> Edit</button> <button  (click)="submitRemove(book)"><i ></i> Delete</button>
+					</td>
+				</tr>	
+			</tbody>
+			
+  <tbody *ngIf="isSearching">
+				<tr *ngFor="let book of books">
+					<td  style="background-color: hsla(120, 100%, 50%, 0.3);">{{book.bname}}</td>
+					<td  style="background-color: hsla(120, 100%, 50%, 0.3);">{{book.author}}</td>
+					<td  style="background-color: hsla(120, 100%, 50%, 0.3);">{{book.pages}}</td>
+					<td  style="background-color: hsla(120, 100%, 50%, 0.3);">
+						<button  (click)="enableEditing(book)"> Edit</button> <button  (click)="submitRemove(book)"><i ></i> Delete</button>
+					</td>
+				</tr>	
+			</tbody> 
+
+<tbody *ngIf="isEditing">
+				<tr>
+					<td colspan="4">
+						<form class="form-inline" #form="ngForm" (ngSubmit)="submitEdit(book)" style="display:inline">
+							<div style="background-color: hsla(120, 100%, 50%, 0.3);" class="form-group">
+							    <input class="form-control" type="text" name="name" [(ngModel)]="book.bname" placeholder="Name" required>
+							</div>
+							<div style="background-color: hsla(120, 100%, 50%, 0.3);" class="form-group">
+								<input class="form-control" type="text" name="author" [(ngModel)]="book.author" placeholder="Author"  required>
+							</div>
+							<div  style="background-color: hsla(120, 100%, 50%, 0.3);" class="form-group">
+								<input class="form-control" type="number" name="weight" [(ngModel)]="book.pages" placeholder="Weight"  min="0" required>
+							</div>
+							<button  type="submit" [disabled]="!form.form.valid"> Save</button>
+						</form>
+						<button  (click)="cancelEditing()"> Cancel</button>
+					</td>
+				</tr>
+			</tbody>
+		 <form  *ngIf="isAdding" class="form-inline" [formGroup]="addBookForm" (ngSubmit)="submitAdd()" style="text-align:center">
+			<div style="background-color: hsla(120, 100%, 50%, 0.3);" class="form-group">
+			    <input class="form-control" type="text" name="bname" formControlName="bname" placeholder="Name"  >
+		
+			</div>
+			<div style="background-color: hsla(120, 100%, 50%, 0.3);" class="form-group">
+				<input class="form-control" type="text" name="author" formControlName="author" placeholder="Author" >
+	
+			</div>
+			<div style="background-color: hsla(120, 100%, 50%, 0.3);" class="form-group">
+				<input class="form-control" type="number" name="pages" formControlName="pages" placeholder="Pages" >
+			</div>
+			
+		<button  type="submit" [disabled]="!addBookForm.valid"> Add</button>
+		 <button  (click)="cancelAdd()"> Cancel</button>
+		</form>
+		</table> 
+
+	     <button  *ngIf="isSearching"(click)="cancelSearch()"> Cancel</button> 
+	  
+	</div>
+
+ </div>  
+ 
+ 
+ 
+
+
+
+
+
+
+
+
