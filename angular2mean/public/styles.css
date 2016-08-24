@@ -1,7 +1,41 @@
 body {
-	font-family: Verdana, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	margin-top: 15px;
+font-weight: normal;
 }
+button{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 9px;
+    border: 1px solid #a12727;
+    border-radius: 8px;
+    background: #f05858;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f05858), to(#f25959));
+    background: -moz-linear-gradient(top, #f05858, #f25959);
+    background: linear-gradient(to bottom, #f05858, #f25959);
+    text-shadow: #591717 1px 1px 1px;
+    font: normal normal bold 14px arial;
+    color: #ffffff;
+    text-decoration: none;
+}
+button:hover,
+button:focus {
+    background: #ff6a6a;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff6a6a), to(#ff6b6b));
+    background: -moz-linear-gradient(top, #ff6a6a, #ff6b6b);
+    background: linear-gradient(to bottom, #ff6a6a, #ff6b6b);
+    color: #ffffff;
+    text-decoration: none;
+}
+button:active {
+    background: #903535;
+    background: -webkit-gradient(linear, left top, left bottom, from(#903535), to(#f25959));
+    background: -moz-linear-gradient(top, #903535, #f25959);
+    background: linear-gradient(to bottom, #903535, #f25959);
+}
+
+
 
 .card {
 	margin-top: .75rem;
@@ -11,10 +45,22 @@ a:hover .fa-heart {
 	color: #cc0000;
 }
 
-table th, table tr td {
-	text-align: center;
+table th{border-left: 1px solid #000;
+border-right: 1px solid #000;text-align: left;}
+ table tr td {
+	text-align: left;
 	width: 25%;
+ background-color: hsla(120, 100%, 50%, 0.3);
 }
+
+input[type=text] {
+   border: 1px solid red; 
+}
+
+input[type=number] {
+   border: 1px solid red; 
+}
+
 
 .alert {
 	z-index: 999;
@@ -23,5 +69,5 @@ table th, table tr td {
 	left: 25%;
 	width: 50%;
 	opacity: 0.9;
-}
 
+}

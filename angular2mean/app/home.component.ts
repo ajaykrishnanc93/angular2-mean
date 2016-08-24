@@ -2,21 +2,27 @@ import {Component, OnInit} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 
-import { EventEmitter, Input, Output} from '@angular/core';
 
+import {OrderBy} from './pipes';
 
 @Component({
 	selector: 'home',
 	templateUrl: 'app/home.component.html',
-  
-
+ 
+ pipes: [OrderBy]
 })
 
 export class HomeComponent implements  OnInit {
 
  
 	private books = [];
-	private options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' }) });
+	private options = new RequestOptions(
+	{ 
+	headers: new Headers(
+	{ 
+	'Content-Type': 'application/json',
+	 'charset': 'UTF-8' })
+	 });
 
 	private isEditing = false;
 	private isSearching = false;
@@ -30,10 +36,7 @@ export class HomeComponent implements  OnInit {
 	private author = new FormControl("", Validators.required);
 	private pages = new FormControl("", Validators.required);
 
-	constructor(private http: Http, private formBuilder: FormBuilder) {
-	
-	
-}
+	constructor(private http: Http, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
 		this.addBookForm = this.formBuilder.group({
@@ -66,15 +69,12 @@ export class HomeComponent implements  OnInit {
 		this.loadBooks();
 	}
 
-	
-	
 	enableSearching(name){
 		this.isSearching = true;
 		this.http.get("/books/"+name).map(res => res.json()).subscribe(
 			data => this.books = data,
 			error => console.log(error)
 		);
-	
 	}
 	
 	
@@ -83,14 +83,13 @@ export class HomeComponent implements  OnInit {
 			res => {
 				this.isEditing = false;
 				this.book = book;
-				
-			},
+				},
 			error => console.log(error)
 		);
 	
 	}
 
-submitRemove(book) {
+    submitRemove(book) {
 		var delOptions = new RequestOptions({
 			body: '', 
 			headers: new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' })}
@@ -114,55 +113,31 @@ submitRemove(book) {
 		
 		this.loadBooks();
 	}
-cancelAdd() {
+    cancelAdd() {
 		this.isAdding = false;
 		this.book = {};
-		
 		this.loadBooks();
 	}
 	
 	cancelSearch() {
 		this.isSearching = false;
 		this.book = {};
-		
 		this.loadBooks();
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	submitAdd() {
 		this.http.post("/book", JSON.stringify(this.addBookForm.value), this.options).subscribe(
 			res => {
 				this.books.push(res.json()); 
-				
 				this.addBookForm.reset();
-			
-			
 			},
 			error => console.log(error)
 		);
 	}
 	
 	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	} 
+} 
 
 
  

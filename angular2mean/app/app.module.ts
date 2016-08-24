@@ -4,7 +4,7 @@ import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {ROUTES} from './app.routes';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import {SearchComponent} from './search';
 import {AppComponent} from './app.component';
 
 import {HomeComponent} from './home.component';
@@ -15,7 +15,7 @@ import {HomeComponent} from './home.component';
     		  HttpModule,
     		  FormsModule,
     		  ReactiveFormsModule],
-    declarations: [AppComponent,
+    declarations: [AppComponent,SearchComponent,
   
     			   
     			   HomeComponent],
